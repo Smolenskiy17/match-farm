@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://clkvh4pjpd3g0" path="res://scripts/match3screen.gd" id="1_0uscy"]
 [ext_resource type="PackedScene" uid="uid://c7w01lsqbl1gh" path="res://scenes/Board.tscn" id="2_d7bpt"]
 
-[node name="Main" type="Node2D" unique_id=1193126338]
+[node name="Match3Screen" type="Node2D" unique_id=1193126338]
 script = ExtResource("1_0uscy")
+
+[node name="Bg" type="ColorRect" parent="." unique_id=1694898306]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.42358288, 0.48452926, 0.6262097, 1)
 
 [node name="Board" parent="." unique_id=1897329013 instance=ExtResource("2_d7bpt")]
 

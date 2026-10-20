@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://crufs305qisre"]
+
+[ext_resource type="FontFile" uid="uid://cdnjs8mbqy0pl" path="res://assets/fonts/ComicRelief-Regular.ttf" id="1_5x3i2"]
+
+[resource]
+default_font = ExtResource("1_5x3i2")
+default_font_size = 18
