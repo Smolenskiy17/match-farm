@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MatchFarm"
-run/main_scene="uid://coblxxjal60q7"
+run/main_scene="uid://d07i6q1fs8xym"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
