@@ -5,7 +5,8 @@ const TILE_SIZE := 100
 const BOARD_OFFSET := Vector2(60, 200)
 
 const TILE_SCENE = preload("res://scenes/Tile.tscn")
-
+@onready var match_sound: AudioStreamPlayer = $MatchSound
+@onready var swap_sound: AudioStreamPlayer = $SwapSound
 var grid: Array = []
 
 var selected_tile: Tile = null
@@ -95,6 +96,8 @@ func _try_swap(from: Vector2i, to: Vector2i) -> void:
 	tween.tween_property(a, "position", _grid_to_pixel(to), 0.15)
 	tween.tween_property(b, "position", _grid_to_pixel(from), 0.15)
 	await tween.finished
+	
+	swap_sound.play()
 
 	if _has_match_at(from) or _has_match_at(to):
 		await _resolve_matches()
@@ -150,7 +153,7 @@ func _resolve_matches() -> void:
 	# Считаем очки (10 за фишку)
 	score += to_remove.size() * 10
 	print("Очки: ", score)
-
+	match_sound.play()
 	# Анимация удаления
 	for tile in to_remove:
 		var tween := create_tween()
