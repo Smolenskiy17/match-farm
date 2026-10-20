@@ -158,6 +158,7 @@ func _resolve_matches() -> void:
 	for tile in to_remove:
 		var tween := create_tween()
 		tween.tween_property(tile, "scale", Vector2.ZERO, 0.15)
+		tile.explode()
 		tween.tween_callback(tile.queue_free)
 		grid[tile.grid_pos.y][tile.grid_pos.x] = null
 
@@ -262,3 +263,20 @@ func _refill_board() -> void:
 			tweens.append(tween)
 	for tween in tweens:
 		await tween.finished
+signal game_finished(final_score: int)
+
+var time_left: float = 30.0
+var is_playing: bool = true
+
+func _process(delta: float) -> void:
+	if not is_playing:
+		return
+	time_left -= delta
+	if time_left <= 0:
+		_finish_game()
+
+func _finish_game() -> void:
+	if not is_playing:
+		return
+	is_playing = false
+	game_finished.emit(score)

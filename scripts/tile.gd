@@ -21,3 +21,8 @@ func setup(p_type: int, p_grid_pos: Vector2i) -> void:
 	grid_pos = p_grid_pos
 	sprite.texture = TEXTURES[type]
 	sprite.modulate = Color.WHITE  # убираем цветной оттенок
+
+@onready var particles: CPUParticles2D = $Particles
+
+func explode() -> void:
+	particles.emitting = true
