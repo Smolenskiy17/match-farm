@@ -76,3 +76,7 @@ func _pixel_to_grid(p: Vector2) -> Vector2i:
 
 func _is_valid(gp: Vector2i) -> bool:
 	return gp.x >= 0 and gp.x < GRID_SIZE and gp.y >= 0 and gp.y < GRID_SIZE
+
+
+func _on_play_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/Match3Screen.tscn")

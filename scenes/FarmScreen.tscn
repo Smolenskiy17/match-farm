@@ -4,3 +4,36 @@
 
 [node name="FarmScreen" type="Node2D" unique_id=515791332]
 script = ExtResource("1_rjr2w")
+
+[node name="Background" type="ColorRect" parent="." unique_id=485975751]
+offset_right = 720.0
+offset_bottom = 1280.0
+color = Color(0.48452926, 0.6651851, 0.48452926, 1)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=1874696073]
+
+[node name="CoinsLabel" type="Label" parent="UI" unique_id=1494257821]
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 123.0
+offset_bottom = 63.0
+theme_override_font_sizes/font_size = 48
+text = "Монеты: 0"
+
+[node name="BuildLabel" type="Label" parent="UI" unique_id=829845707]
+offset_left = 40.0
+offset_top = 120.0
+offset_right = 321.0
+offset_bottom = 143.0
+theme_override_font_sizes/font_size = 32
+text = "Тапни по клетке, чтобы построить"
+
+[node name="PlayButton" type="Button" parent="UI" unique_id=736594837]
+offset_left = 40.0
+offset_top = 1150.0
+offset_right = 680.0
+offset_bottom = 1240.0
+theme_override_font_sizes/font_size = 36
+text = "Играть"
+
+[connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]

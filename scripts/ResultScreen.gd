@@ -20,4 +20,4 @@ func setup(p_score: int) -> void:
 	GameData.save_game()
 
 func _on_claim_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/Match3Screen.tscn.tscn")
+	get_tree().change_scene_to_file("res://scenes/Main.tscn")
