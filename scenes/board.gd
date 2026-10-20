@@ -29,7 +29,7 @@ func _fill_board() -> void:
 			var tile := TILE_SCENE.instantiate() as Tile
 			add_child(tile)
 			var pos := Vector2i(x, y)
-			var t := randi() % 5
+			var t: int = randi() % 5
 			tile.setup(t, pos)
 			tile.position = _grid_to_pixel(pos)
 			grid[y][x] = tile
@@ -84,17 +84,23 @@ func _try_swap(from: Vector2i, to: Vector2i) -> void:
 	var b: Tile = grid[to.y][to.x]
 	if a == null or b == null:
 		return
+
 	grid[from.y][from.x] = b
 	grid[to.y][to.x] = a
 	a.grid_pos = to
 	b.grid_pos = from
+
 	var tween := create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(a, "position", _grid_to_pixel(to), 0.15)
 	tween.tween_property(b, "position", _grid_to_pixel(from), 0.15)
 	await tween.finished
-	if not _has_match_at(from) and not _has_match_at(to):
-		_swap_back(from, to)
+
+	if _has_match_at(from) or _has_match_at(to):
+		await _resolve_matches()
+	else:
+		await _swap_back(from, to)
+
 
 func _swap_back(from: Vector2i, to: Vector2i) -> void:
 	var a: Tile = grid[to.y][to.x]
@@ -130,3 +136,126 @@ func _count_line(gp: Vector2i, dir: Vector2i) -> int:
 		count += 1
 		p -= dir
 	return count
+
+# --- Удаление, падение, рефилл, каскады ---
+
+var score: int = 0
+
+func _resolve_matches() -> void:
+	# Ищем все совпадения на поле
+	var to_remove: Array = _find_all_matches()
+	if to_remove.is_empty():
+		return
+
+	# Считаем очки (10 за фишку)
+	score += to_remove.size() * 10
+	print("Очки: ", score)
+
+	# Анимация удаления
+	for tile in to_remove:
+		var tween := create_tween()
+		tween.tween_property(tile, "scale", Vector2.ZERO, 0.15)
+		tween.tween_callback(tile.queue_free)
+		grid[tile.grid_pos.y][tile.grid_pos.x] = null
+
+	# Ждём, пока анимация удаления закончится
+	await get_tree().create_timer(0.2).timeout
+
+	# Падение и рефилл
+	await _apply_gravity()
+	await _refill_board()
+
+	# Каскад: проверяем ещё раз
+	await _resolve_matches()
+
+func _find_all_matches() -> Array:
+	var result: Array = []
+	var seen: Dictionary = {}
+	for y in GRID_SIZE:
+		for x in GRID_SIZE:
+			var gp := Vector2i(x, y)
+			if grid[y][x] == null:
+				continue
+			if _has_match_at(gp):
+				# Собираем всю линию
+				var t: int = grid[y][x].type
+				# Горизонталь
+				var h_start := x
+				while h_start > 0 and grid[y][h_start - 1] != null and grid[y][h_start - 1].type == t:
+					h_start -= 1
+				var h_end := x
+				while h_end < GRID_SIZE - 1 and grid[y][h_end + 1] != null and grid[y][h_end + 1].type == t:
+					h_end += 1
+				if h_end - h_start + 1 >= 3:
+					for i in range(h_start, h_end + 1):
+						var key := Vector2i(i, y)
+						if not seen.has(key):
+							seen[key] = true
+							result.append(grid[y][i])
+				# Вертикаль
+				var v_start := y
+				while v_start > 0 and grid[v_start - 1][x] != null and grid[v_start - 1][x].type == t:
+					v_start -= 1
+				var v_end := y
+				while v_end < GRID_SIZE - 1 and grid[v_end + 1][x] != null and grid[v_end + 1][x].type == t:
+					v_end += 1
+				if v_end - v_start + 1 >= 3:
+					for j in range(v_start, v_end + 1):
+						var key := Vector2i(x, j)
+						if not seen.has(key):
+							seen[key] = true
+							result.append(grid[j][x])
+	return result
+
+func _apply_gravity() -> void:
+	# Для каждого столбца: сдвигаем все фишки вниз, заполняя пустоты
+	for x in GRID_SIZE:
+		var write_y := GRID_SIZE - 1
+		for y in range(GRID_SIZE - 1, -1, -1):
+			if grid[y][x] != null:
+				if write_y != y:
+					grid[write_y][x] = grid[y][x]
+					grid[y][x] = null
+					grid[write_y][x].grid_pos = Vector2i(x, write_y)
+				write_y -= 1
+
+	# Анимация падения
+	var tweens: Array = []
+	for y in GRID_SIZE:
+		for x in GRID_SIZE:
+			var tile: Tile = grid[y][x]
+			if tile == null:
+				continue
+			var target := _grid_to_pixel(Vector2i(x, y))
+			if tile.position != target:
+				var tween := create_tween()
+				tween.tween_property(tile, "position", target, 0.2)
+				tweens.append(tween)
+	for tween in tweens:
+		await tween.finished
+
+func _refill_board() -> void:
+	# Заполняем пустые верхние клетки новыми фишками
+	var tweens: Array = []
+	for x in GRID_SIZE:
+		var empty_count := 0
+		for y in GRID_SIZE:
+			if grid[y][x] == null:
+				empty_count += 1
+		# Создаём новые фишки над полем
+		for i in empty_count:
+			var y := empty_count - 1 - i  # сверху вниз
+			var tile := TILE_SCENE.instantiate() as Tile
+			add_child(tile)
+			var t := randi() % 5
+			tile.setup(t, Vector2i(x, y))
+			# Стартовая позиция — выше поля
+			var start_pos := _grid_to_pixel(Vector2i(x, y)) + Vector2(0, -TILE_SIZE * (empty_count + 1))
+			tile.position = start_pos
+			grid[y][x] = tile
+			var target := _grid_to_pixel(Vector2i(x, y))
+			var tween := create_tween()
+			tween.tween_property(tile, "position", target, 0.25)
+			tweens.append(tween)
+	for tween in tweens:
+		await tween.finished
