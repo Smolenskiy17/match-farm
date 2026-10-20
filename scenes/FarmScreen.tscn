@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://brexwoep13yc5"]
+
+[ext_resource type="Script" uid="uid://c3bou1nooel75" path="res://scripts/farmscreen.gd" id="1_rjr2w"]
+
+[node name="FarmScreen" type="Node2D" unique_id=515791332]
+script = ExtResource("1_rjr2w")
