@@ -21,9 +21,9 @@ GameData="*uid://dx48labn54b1q"
 
 [display]
 
-window/size/viewport_width=1281
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [physics]
 

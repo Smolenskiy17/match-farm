@@ -1,8 +1,8 @@
 extends Node2D
 
 const GRID_SIZE := 6
-const TILE_SIZE := 100
-const BOARD_OFFSET := Vector2(60, 200)
+const TILE_SIZE := 90
+const BOARD_OFFSET := Vector2(340, 60)
 
 const TILE_SCENE = preload("res://scenes/Tile.tscn")
 @onready var match_sound: AudioStreamPlayer = $MatchSound

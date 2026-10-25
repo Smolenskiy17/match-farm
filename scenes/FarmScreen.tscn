@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3bou1nooel75" path="res://scripts/farmscreen.gd" id="1_rjr2w"]
 [ext_resource type="AudioStream" uid="uid://cr26fq7srjp1s" path="res://assets/sounds/bgm_farm.ogg" id="2_xotyj"]
+[ext_resource type="AudioStream" uid="uid://bqtn53nk3lyy5" path="res://assets/sounds/build.ogg" id="3_h7fg8"]
 
 [node name="FarmScreen" type="Node2D" unique_id=515791332]
 script = ExtResource("1_rjr2w")
@@ -27,17 +28,17 @@ theme_override_font_sizes/font_size = 32
 text = "Тапни по клетке, чтобы построить"
 
 [node name="PlayButton" type="Button" parent="UI" unique_id=736594837]
-offset_left = 40.0
-offset_top = 1150.0
-offset_right = 680.0
-offset_bottom = 1240.0
+offset_left = 1035.0
+offset_top = 590.0
+offset_right = 1235.0
+offset_bottom = 680.0
 theme_override_font_sizes/font_size = 36
 text = "Играть"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1304181286]
 stream = ExtResource("2_xotyj")
-volume_db = -10.0
 
 [node name="BuildSound" type="AudioStreamPlayer" parent="." unique_id=2119148768]
+stream = ExtResource("3_h7fg8")
 
 [connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]

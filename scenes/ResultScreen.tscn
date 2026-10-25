@@ -6,38 +6,40 @@
 script = ExtResource("1_lfgmt")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=620559115]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(1, 1, 1, 0.193)
 
 [node name="TitleLabel" type="Label" parent="." unique_id=373711715]
-offset_left = 200.0
-offset_top = 400.0
-offset_right = 703.0
-offset_bottom = 488.0
+offset_left = 440.0
+offset_top = 150.0
+offset_right = 943.0
+offset_bottom = 238.0
 theme_override_font_sizes/font_size = 64
 text = "Игра окончена!"
 
 [node name="ScoreLabel" type="Label" parent="." unique_id=437608061]
-offset_left = 250.0
-offset_top = 550.0
-offset_right = 431.0
-offset_bottom = 617.0
+offset_left = 500.0
+offset_top = 280.0
+offset_right = 681.0
+offset_bottom = 347.0
 theme_override_font_sizes/font_size = 48
 text = "Очки: 0"
 
 [node name="CoinsLabel" type="Label" parent="." unique_id=1633067939]
-offset_left = 250.0
-offset_top = 650.0
-offset_right = 526.0
-offset_bottom = 717.0
+offset_left = 500.0
+offset_top = 360.0
+offset_right = 776.0
+offset_bottom = 427.0
 theme_override_font_sizes/font_size = 48
 text = "Монеты: +0"
 
 [node name="ClaimButton" type="Button" parent="." unique_id=1648791634]
-offset_left = 280.0
-offset_top = 850.0
-offset_right = 440.0
-offset_bottom = 930.0
+offset_left = 540.0
+offset_top = 480.0
+offset_right = 740.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 42
 text = "Забрать"
 
 [connection signal="pressed" from="ClaimButton" to="." method="_on_claim_button_pressed"]

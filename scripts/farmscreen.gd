@@ -1,8 +1,8 @@
 extends Node2D
 
 const GRID_SIZE := 4
-const TILE_SIZE := 160
-const BOARD_OFFSET := Vector2(40, 300)
+const TILE_SIZE := 140
+const BOARD_OFFSET := Vector2(40, 140)
 
 # Что можно построить: тип → цена в монетах
 const BUILDINGS = {
