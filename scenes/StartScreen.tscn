@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://jdnkdirfugmw"]
+
+[ext_resource type="Script" uid="uid://bctoku6wi7wfq" path="res://scripts/StartScreen.gd" id="1_4vrcr"]
+
+[node name="StartScreen" type="Node2D" unique_id=1330011636]
+script = ExtResource("1_4vrcr")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=413681984]
+offset_right = 720.0
+offset_bottom = 1280.0
+color = Color(0.48452926, 0.6651851, 0.48452926, 1)
+
+[node name="Match Farm" type="Label" parent="." unique_id=1176536852]
+offset_left = 350.0
+offset_top = 160.0
+offset_right = 906.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 96
+text = "Match Farm"
+
+[node name="Losung" type="Label" parent="." unique_id=1732058951]
+offset_left = 420.0
+offset_top = 300.0
+offset_right = 846.0
+offset_bottom = 355.0
+theme_override_font_sizes/font_size = 40
+text = "Выращивай и играй!"
+
+[node name="PlayButton" type="Button" parent="." unique_id=690017596]
+offset_left = 520.0
+offset_top = 400.0
+offset_right = 728.0
+offset_bottom = 500.0
+theme_override_font_sizes/font_size = 56
+text = "Играть"
+
+[node name="ResetButton" type="Button" parent="." unique_id=1879445096]
+offset_left = 550.0
+offset_top = 510.0
+offset_right = 700.0
+offset_bottom = 585.0
+theme_override_font_sizes/font_size = 40
+text = "Сброс"
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

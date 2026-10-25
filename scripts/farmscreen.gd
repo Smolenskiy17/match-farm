@@ -12,6 +12,7 @@ const BUILDINGS = {
 
 var grid: Array = []  # grid[y][x] = Node2D или null
 
+@onready var build_sound: AudioStreamPlayer = $BuildSound
 @onready var coins_label: Label = $UI/CoinsLabel
 @onready var build_label: Label = $UI/BuildLabel
 
@@ -50,6 +51,7 @@ func _try_build(gp: Vector2i, building_type: int) -> void:
 	GameData.coins -= info.cost
 	GameData.save_game()
 	_spawn_building(gp, building_type)
+	build_sound.play()
 	_update_ui()
 	build_label.text = "Построено: " + info.name
 

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clkvh4pjpd3g0" path="res://scripts/match3screen.gd" id="1_0uscy"]
 [ext_resource type="PackedScene" uid="uid://c7w01lsqbl1gh" path="res://scenes/Board.tscn" id="2_d7bpt"]
+[ext_resource type="AudioStream" uid="uid://cr26fq7srjp1s" path="res://assets/sounds/bgm_farm.ogg" id="3_d7bpt"]
 
 [node name="Match3Screen" type="Node2D" unique_id=1193126338]
 script = ExtResource("1_0uscy")
@@ -22,3 +23,7 @@ offset_right = 101.0
 offset_bottom = 63.0
 theme_override_font_sizes/font_size = 48
 text = "Очки: 0"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1237463750]
+stream = ExtResource("3_d7bpt")
+volume_db = -10.0

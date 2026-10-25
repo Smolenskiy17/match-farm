@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://brexwoep13yc5"]
 
 [ext_resource type="Script" uid="uid://c3bou1nooel75" path="res://scripts/farmscreen.gd" id="1_rjr2w"]
+[ext_resource type="AudioStream" uid="uid://cr26fq7srjp1s" path="res://assets/sounds/bgm_farm.ogg" id="2_xotyj"]
 
 [node name="FarmScreen" type="Node2D" unique_id=515791332]
 script = ExtResource("1_rjr2w")
@@ -32,5 +33,11 @@ offset_right = 680.0
 offset_bottom = 1240.0
 theme_override_font_sizes/font_size = 36
 text = "Играть"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1304181286]
+stream = ExtResource("2_xotyj")
+volume_db = -10.0
+
+[node name="BuildSound" type="AudioStreamPlayer" parent="." unique_id=2119148768]
 
 [connection signal="pressed" from="UI/PlayButton" to="." method="_on_play_button_pressed"]

@@ -150,8 +150,8 @@ func _resolve_matches() -> void:
 	if to_remove.is_empty():
 		return
 
-	# Считаем очки (10 за фишку)
-	score += to_remove.size() * 10
+	# Считаем очки (15 за фишку)
+	score += to_remove.size() * 15
 	print("Очки: ", score)
 	match_sound.play()
 	# Анимация удаления
@@ -265,7 +265,7 @@ func _refill_board() -> void:
 		await tween.finished
 signal game_finished(final_score: int)
 
-var time_left: float = 30.0
+var time_left: float = 45.0
 var is_playing: bool = true
 
 func _process(delta: float) -> void:
