@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c870kn8fv2ilv"]
+
+[ext_resource type="Script" uid="uid://fsab8bfp6wxv" path="res://scripts/SettingsScreen.gd" id="1_pycgp"]
+
+[node name="SettingsScreen" type="Node2D" unique_id=1700256918]
+script = ExtResource("1_pycgp")

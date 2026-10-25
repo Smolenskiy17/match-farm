@@ -23,3 +23,7 @@ func load_game() -> void:
 		coins = config.get_value("resources", "coins", 0)
 		wood = config.get_value("resources", "wood", 0)
 		best_score = config.get_value("stats", "best_score", 0)
+
+func _ready() -> void:
+	load_game()
+	Settings.load_settings()

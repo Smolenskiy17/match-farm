@@ -1,46 +1,77 @@
 [gd_scene format=3 uid="uid://jdnkdirfugmw"]
 
 [ext_resource type="Script" uid="uid://bctoku6wi7wfq" path="res://scripts/StartScreen.gd" id="1_4vrcr"]
+[ext_resource type="Texture2D" uid="uid://d07txnoov0ryg" path="res://assets/textures/kenney_background-elements-2/Samples/main_bg.png" id="2_a0vbq"]
+[ext_resource type="Texture2D" uid="uid://ftmkv1ymqpay" path="res://assets/textures/free-icon-settings-694900.png" id="3_nj7f0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gn4gw"]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8w2rd"]
+draw_center = false
 
 [node name="StartScreen" type="Node2D" unique_id=1330011636]
 script = ExtResource("1_4vrcr")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=413681984]
+[node name="Background" type="TextureRect" parent="." unique_id=1261981066]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.48452926, 0.6651851, 0.48452926, 1)
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_a0vbq")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="Match Farm" type="Label" parent="." unique_id=1176536852]
-offset_left = 350.0
-offset_top = 160.0
-offset_right = 906.0
-offset_bottom = 292.0
+offset_left = 47.0
+offset_top = 52.0
+offset_right = 603.0
+offset_bottom = 184.0
+theme_override_colors/font_color = Color(0.18346503, 0.23685281, 0.2918012, 0.37600002)
 theme_override_font_sizes/font_size = 96
 text = "Match Farm"
 
 [node name="Losung" type="Label" parent="." unique_id=1732058951]
-offset_left = 420.0
-offset_top = 300.0
-offset_right = 846.0
-offset_bottom = 355.0
+offset_left = 112.0
+offset_top = 160.0
+offset_right = 538.0
+offset_bottom = 215.0
+theme_override_colors/font_color = Color(0.18431373, 0.23529412, 0.2901961, 0.3764706)
 theme_override_font_sizes/font_size = 40
 text = "Выращивай и играй!"
 
 [node name="PlayButton" type="Button" parent="." unique_id=690017596]
-offset_left = 520.0
-offset_top = 400.0
-offset_right = 728.0
-offset_bottom = 500.0
+offset_left = 540.0
+offset_top = 580.0
+offset_right = 748.0
+offset_bottom = 682.0
+theme_override_colors/font_color = Color(16.648697, 16.648697, 16.648697, 1)
 theme_override_font_sizes/font_size = 56
+theme_override_styles/normal = SubResource("StyleBoxFlat_gn4gw")
 text = "Играть"
 
 [node name="ResetButton" type="Button" parent="." unique_id=1879445096]
-offset_left = 550.0
-offset_top = 510.0
-offset_right = 700.0
-offset_bottom = 585.0
+offset_left = 1119.0
+offset_top = 633.0
+offset_right = 1269.0
+offset_bottom = 708.0
+theme_override_colors/font_color = Color(1.0104771, 1.0104771, 1.0104771, 1)
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxFlat_8w2rd")
 text = "Сброс"
+
+[node name="SettingsButton" type="Button" parent="." unique_id=770009461]
+offset_left = 1198.0
+offset_top = 38.0
+offset_right = 1246.0
+offset_bottom = 86.0
+icon = ExtResource("3_nj7f0")
+flat = true
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
